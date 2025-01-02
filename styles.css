@@ -1,0 +1,122 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: orange;
+    text-align: center;
+    color:black;
+}
+#vh100{
+    height: 100vh;
+}
+
+h1{
+    font-size: 3rem;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#garfield-img{
+    width: 10%;
+    border-radius: 500px;
+    display: block;
+    margin: 30px auto;
+    outline: 5px solid black;
+}
+
+#slogan{
+    font-size: 2rem;
+}
+
+p{
+    font-size: 1.5rem;
+}
+
+h2{
+    margin-top: 50px;
+    font-size: 2rem;
+}
+
+#tokenomics{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin:40px 100px;
+}
+
+.img-tokenomics{
+    width: 70px;
+}
+
+canvas{
+    margin:50px auto;
+}
+
+.buttons{
+    margin-top: 50px;
+}
+
+#garfield-laying{
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+}
+
+button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 12%;
+    padding: 10px 10px;
+    font-size: 1rem;
+    font-weight: bolder;
+    display: inline;
+    border-radius: 12px;
+    border: 3px solid rgb(82, 82, 82);
+}
+
+button:hover{
+    background-color: rgb(254, 186, 60);
+}
+
+a{
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px)
+{
+    h1{
+        font-size: 2rem;
+    }
+
+    #garfield-img{
+        width: 30%;
+        display: block;
+        margin: 30px auto;
+        outline: 3px solid black;
+    }
+    #slogan{
+        font-size: 1.4rem;
+    }
+    #garfield-laying{
+        width: 40%;
+        padding-bottom: 25px;
+    }
+    button{
+        display: block;
+        margin: 0 auto;
+        width: 30%;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+
+    .img-tokenomics{
+        width: 40px;
+    }
+    p{
+        font-size: 1rem;
+    }
+    
+}
