@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garfield Food Catcher</title>
+  <link rel="stylesheet" href="gameStyles.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="score">Score: 0</div>
+    <div id="timer">Time: 60</div>
+    <div id="game-over">Game Over! Final Score: 0</div>
+    <div id="garfield"></div>
+  </div>
+
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+    });
+
+    const gameContainer = document.getElementById('game-container');
+    const garfield = document.getElementById('garfield');
+    const scoreElement = document.getElementById('score');
+    const timerElement = document.getElementById('timer');
+    const gameOverElement = document.getElementById('game-over');
+
+    let score = 0;
+    let garfieldPosition = gameContainer.offsetWidth / 2;
+    const garfieldSpeed = 50;
+    let timeLeft = 60;
+    let gameActive = true;
+
+    // Keyboard control (for desktop)
+    document.addEventListener('keydown', (e) => {
+      if (!gameActive) return;
+      if (e.key === 'ArrowLeft') {
+        garfieldPosition -= garfieldSpeed;
+        if (garfieldPosition < 0) garfieldPosition = 0;
+      } else if (e.key === 'ArrowRight') {
+        garfieldPosition += garfieldSpeed;
+        if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
+          garfieldPosition = gameContainer.offsetWidth - garfield.offsetWidth;
+        }
+      }
+      garfield.style.left = `${garfieldPosition}px`;
+    });
+
+    // Mobile touch controls
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    gameContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    gameContainer.addEventListener('touchmove', (e) => {
+      touchEndX = e.touches[0].clientX;
+      if (touchEndX > touchStartX) {
+        garfieldPosition += garfieldSpeed;
+      } else {
+        garfieldPosition -= garfieldSpeed;
+      }
+
+      // Prevent Garfield from going out of bounds
+      if (garfieldPosition < 0) garfieldPosition = 0;
+      if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
+        garfieldPosition = gameContainer.offsetWidth - garfield.offsetWidth;
+      }
+
+      garfield.style.left = `${garfieldPosition}px`;
+    });
+
+    // Array of food image URLs (insert your relative paths here)
+    const foodImages = [
+      'imagesGame/lasagne.png',
+      'imagesGame/pizza.png',
+      'imagesGame/hotdog.png',
+      'imagesGame/fries.png',
+      'imagesGame/burger.png',
+      'imagesGame/cake.png'
+      // Add more food images as needed
+    ];
+
+    // Create food
+    function createFood() {
+      const food = document.createElement('div');
+      food.classList.add('food');
+      food.style.left = `${Math.random() * (gameContainer.offsetWidth - 40)}px`;
+      food.style.top = '0px';
+
+      // Randomly select a food image
+      const randomFoodImage = foodImages[Math.floor(Math.random() * foodImages.length)];
+      food.style.backgroundImage = `url('${randomFoodImage}')`;
+
+      gameContainer.appendChild(food);
+      return food;
+    }
+
+    // Update food position
+    function moveFood(food) {
+      if (!gameActive) {
+        food.remove();
+        return false;
+      }
+
+      let foodTop = parseInt(food.style.top);
+      foodTop += 10;
+      food.style.top = `${foodTop}px`;
+
+      // Check collision with Garfield
+      const foodRect = food.getBoundingClientRect();
+      const garfieldRect = garfield.getBoundingClientRect();
+      if (
+        foodRect.bottom >= garfieldRect.top &&
+        foodRect.left < garfieldRect.right &&
+        foodRect.right > garfieldRect.left
+      ) {
+        food.remove();
+        score++;
+        scoreElement.textContent = `Score: ${score}`;
+        return false;
+      }
+
+      // Remove food if it falls out of bounds
+      if (foodTop > gameContainer.offsetHeight) {
+        food.remove();
+        return false;
+      }
+      return true;
+    }
+
+    // Game loop
+    const foodInterval = setInterval(() => {
+      if (!gameActive) return;
+      const food = createFood();
+      const foodMovement = setInterval(() => {
+        if (!moveFood(food)) {
+          clearInterval(foodMovement);
+        }
+      }, 50);
+    }, 1000);
+
+    // Timer countdown
+    const timerInterval = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        timerElement.textContent = `Time: ${timeLeft}`;
+      } else {
+        clearInterval(timerInterval);
+        clearInterval(foodInterval);
+        gameActive = false;
+        gameOverElement.style.display = 'block';
+        gameOverElement.textContent = `Game Over! Final Score: ${score}`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
