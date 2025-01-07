@@ -38,7 +38,7 @@ body {
     background-color: transparent; /* Remove the background color */
     background-size: cover; /* Ensures the image covers the entire div */
     background-position: center; /* Centers the image */
-    transition: top 0.1s ease-in-out; /* Smooth transition */
+    /*transition: top 0.1s ease-in-out;  Smooth transition */
   }
 
   #score {
