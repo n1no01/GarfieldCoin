@@ -93,6 +93,19 @@ a{
     text-decoration: none;
 }
 
+#gameLink {
+    display: block;
+    margin:0 auto;
+    width: fit-content;
+  }
+
+#img-end{
+    width: 20%;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    float: left;
+}
+
 @media screen and (max-width: 600px)
 {
     h1{
@@ -119,7 +132,7 @@ a{
     }
     h2{
         font-size: 1.5rem;
-        margin-top: 0px;
+        margin-top: 20px;
     }
 
     .img-tokenomics{
