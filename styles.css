@@ -111,6 +111,10 @@ a{
     h1{
         font-size: 2rem;
     }
+    #vh100{
+        height: 50%;
+        padding-bottom: 40px;
+    }
 
     #garfield-img{
         width: 30%;
@@ -124,9 +128,6 @@ a{
     #garfield-laying{
         width: 40%;
         padding-bottom: 25px;
-    }
-    #vh100{
-    height: 90vh;
     }
     button{
         display: block;
