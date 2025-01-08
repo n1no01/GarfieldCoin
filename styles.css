@@ -125,6 +125,9 @@ a{
         width: 40%;
         padding-bottom: 25px;
     }
+    #vh100{
+    height: 80vh;
+    }
     button{
         display: block;
         margin: 0 auto;
