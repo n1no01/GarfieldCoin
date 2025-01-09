@@ -40,7 +40,7 @@
       } else if (e.key === 'ArrowRight') {
         garfieldPosition += garfieldSpeed;
         if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
-          garfieldPosition = gameContainer.offsetWidth - garfield.offsetWidth;
+          garfieldPosition = gameContainer.offsetWidth;
         }
       }
       garfield.style.left = `${garfieldPosition}px`;
@@ -65,7 +65,7 @@
       // Prevent Garfield from going out of bounds
       if (garfieldPosition < 0) garfieldPosition = 0;
       if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
-        garfieldPosition = gameContainer.offsetWidth - garfield.offsetWidth;
+        garfieldPosition = gameContainer.offsetWidth; //- garfield.offsetWidth;
       }
 
       garfield.style.left = `${garfieldPosition}px`;
@@ -139,7 +139,7 @@
           clearInterval(foodMovement);
         }
       }, 50);
-    }, 1000);
+    }, 700);
 
     // Timer countdown
     const timerInterval = setInterval(() => {
