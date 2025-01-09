@@ -68,9 +68,9 @@ gameContainer.addEventListener('touchmove', (e) => {
   const garfieldWidth = garfield.offsetWidth;
 
   if (garfieldPosition < 0) garfieldPosition = 0;
-  if (garfieldPosition > containerWidth - garfieldWidth) {
-    garfieldPosition = containerWidth - garfieldWidth;
-  }
+  if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
+  garfieldPosition = gameContainer.offsetWidth - garfield.offsetWidth;
+}
 
   // Update Garfield's position
   garfield.style.left = `${garfieldPosition}px`;
