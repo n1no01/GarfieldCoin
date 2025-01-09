@@ -47,29 +47,34 @@
     });
 
     // Mobile touch controls
-    let touchStartX = 0;
-    let touchEndX = 0;
+  let touchStartX = 0;
+  let garfieldStartX = 0;
 
-    gameContainer.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    });
+// Capture the initial touch position and Garfield's position
+gameContainer.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+  garfieldStartX = garfieldPosition;
+});
 
-    gameContainer.addEventListener('touchmove', (e) => {
-      touchEndX = e.touches[0].clientX;
-      if (touchEndX > touchStartX) {
-        garfieldPosition += garfieldSpeed;
-      } else {
-        garfieldPosition -= garfieldSpeed;
-      }
+gameContainer.addEventListener('touchmove', (e) => {
+  const touchCurrentX = e.touches[0].clientX;
+  const touchDeltaX = touchCurrentX - touchStartX;
 
-      // Prevent Garfield from going out of bounds
-      if (garfieldPosition < 0) garfieldPosition = 0;
-      if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
-        garfieldPosition = gameContainer.offsetWidth; //- garfield.offsetWidth;
-      }
+  // Calculate Garfield's new position based on touch movement
+  garfieldPosition = garfieldStartX + touchDeltaX;
 
-      garfield.style.left = `${garfieldPosition}px`;
-    });
+  // Prevent Garfield from moving out of bounds
+  const containerWidth = gameContainer.offsetWidth;
+  const garfieldWidth = garfield.offsetWidth;
+
+  if (garfieldPosition < 0) garfieldPosition = 0;
+  if (garfieldPosition > containerWidth - garfieldWidth) {
+    garfieldPosition = containerWidth - garfieldWidth;
+  }
+
+  // Update Garfield's position
+  garfield.style.left = `${garfieldPosition}px`;
+});
 
     // Array of food image URLs (insert your relative paths here)
     const foodImages = [
