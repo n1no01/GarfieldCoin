@@ -40,7 +40,7 @@
       } else if (e.key === 'ArrowRight') {
         garfieldPosition += garfieldSpeed;
         if (garfieldPosition > gameContainer.offsetWidth - garfield.offsetWidth) {
-          garfieldPosition = gameContainer.offsetWidth;
+          garfieldPosition = gameContainer.offsetWidth - 30;
         }
       }
       garfield.style.left = `${garfieldPosition}px`;
