@@ -53,6 +53,7 @@ h2{
     justify-content: center;
     gap: 60px;
     margin:40px 100px;
+    padding-bottom: 50px;
 }
 
 .img-tokenomics{
@@ -137,6 +138,10 @@ a{
     h2{
         font-size: 1.5rem;
         margin-top: 20px;
+    }
+
+    #tokenomics{
+        padding-bottom: 0;
     }
 
     .img-tokenomics{
