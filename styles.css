@@ -99,11 +99,11 @@ a{
     width: fit-content;
   }
 
-#img-end{
-    width: 20%;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    float: left;
+.disclaimer{
+    padding: 40px 0 40px;
+    background-color: white;
+    border-top: 1px solid black;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 600px)
@@ -144,6 +144,9 @@ a{
     }
     p{
         font-size: 1rem;
+    }
+    .disclaimer{
+        padding: 40px 0 40px;
     }
     
 }
