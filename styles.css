@@ -56,6 +56,10 @@ h2{
     padding-bottom: 50px;
 }
 
+#tokenomics p {
+    padding-top: 20px;
+}
+
 .img-tokenomics{
     width: 70px;
 }
