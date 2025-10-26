@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Portal</title>
+  <link rel="stylesheet" href="landing.css"/>
+</head>
+<body>
+    <button id="logout-btn" class="logout">Logout</button>
+    <!-- User Account Popup -->
+<div id="account-popup" class="popup">
+  <div class="popup-content">
+    <h2>Create Your Account</h2>
+    <form id="account-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="wallet">External Wallet Address:</label>
+      <input type="text" id="wallet" name="wallet" required>
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+  <div class="container">
+    <header>
+      <h2>Welcome, Player</h2>
+      <p>You're signed in — ready to play?</p>
+    </header>
+
+    <main>
+      <section class="play-section">
+        <button id="play-btn">▶ Play Game</button>
+      </section>
+
+      <section class="tables">
+        <div class="table-card">
+          <h2>🏆 Best Scores</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Alice</td>
+                <td>9800</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Bob</td>
+                <td>9200</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Nino</td>
+                <td>8900</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <h2>🏅 Weekly Winners</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Winner</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Oct 20–26</td>
+                <td>Nino</td>
+                <td>9100</td>
+              </tr>
+              <tr>
+                <td>Oct 13–19</td>
+                <td>Alice</td>
+                <td>9700</td>
+              </tr>
+              <tr>
+                <td>Oct 6–12</td>
+                <td>Bob</td>
+                <td>9400</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="landing.js"></script>
+</body>
+</html>

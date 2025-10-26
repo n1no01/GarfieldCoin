@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: orange;
+  color: black;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: black;
+  color: orange;
+  border: 3px solid black;
+  border-radius: 12px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout:hover {
+  background-color: rgb(254, 186, 60);
+  color: black;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: orange;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.popup-content input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+.popup-content button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: black;
+  color: orange;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.play-section {
+  margin-bottom: 50px;
+}
+
+#play-btn {
+  background-color: black;
+  color: orange;
+  border: 3px solid black;
+  border-radius: 12px;
+  padding: 12px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#play-btn:hover {
+  background-color: rgb(254, 186, 60);
+  color: black;
+}
+
+.tables {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.table-card {
+  background-color: white;
+  border: 3px solid black;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  box-shadow: 5px 5px 0 black;
+  transition: transform 0.2s ease-in-out;
+}
+
+.table-card:hover {
+  transform: translateY(-5px);
+}
+
+.table-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+th, td {
+  border: 2px solid black;
+  padding: 0.7rem;
+  text-align: center;
+}
+
+th {
+  background-color: black;
+  color: orange;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(255, 221, 160);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgb(255, 240, 200);
+}
+
+tbody tr:hover {
+  background-color: rgb(254, 186, 60);
+}
