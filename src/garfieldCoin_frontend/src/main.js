@@ -34,8 +34,8 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
                   <div id="account-popup" style="display:flex;">
                     <form id="account-form" style="background:#fff;padding:20px;border-radius:12px;">
                       <h2>Create your account</h2>
-                      <input type="text" id="username" placeholder="Username" required style="display:block;margin:10px 0;padding:8px;width:100%;">
-                      <input type="text" id="wallet" placeholder="Wallet Address" required style="display:block;margin:10px 0;padding:8px;width:100%;">
+                      <input type="text" id="username" placeholder="Enter your username" required style="display:block;margin:10px 0;padding:8px;width:100%;">
+                      <input type="text" id="wallet" placeholder="Enter your $GFC wallet address" required style="display:block;margin:10px 0;padding:8px;width:100%;">
                       <button type="submit">Submit</button>
                     </form>
                   </div>
@@ -49,12 +49,16 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
                     const username = document.getElementById("username").value.trim();
                     const wallet = document.getElementById("wallet").value.trim();
 
-                    if (!username || !wallet) {
+                    const isAvailable = await checkUsername(username);
+
+                     if (!username || !wallet) {
                         alert("Please fill in all fields.");
                         return;
                     }
-
-                    try {
+  
+                    if (isAvailable) {
+                        try {
+                        const walletAddress = document.getElementById("wallet").value;
                         await actor.registerUser(username, wallet);
                         alert("Account created successfully!");
 
@@ -67,9 +71,10 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
 
                         // Redirect to landing page
                         window.location.href = "landing.html";
-                    } catch (err) {
-                        console.error(err);
-                        alert("Failed to create account. Try again.");
+                        } catch (err) {
+                            console.error(err);
+                            alert("Failed to create account. Try again.");
+                        }
                     }
                 });
             } else {
@@ -86,4 +91,19 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
             alert("Login failed.");
         }
     });
+
+    async function checkUsername(username) {
+    try {
+    const exists = await actor.usernameExists(username);
+    
+    if (exists) {
+      alert("Username already taken. Please choose another.");
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("Failed to check username:", error);
+    return false;
+  }
+}
 });

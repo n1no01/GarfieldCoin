@@ -2,8 +2,7 @@ import Principal "mo:base/Principal";
 import Trie "mo:base/Trie";
 import Array "mo:base/Array";
 import Int "mo:base/Int";
-import Timer "mo:base/Timer";
-import Time "mo:base/Time";
+import Iter "mo:base/Iter";
 
 persistent actor {
 
@@ -17,16 +16,7 @@ persistent actor {
     principal: Principal;
     username: Text;
     score: Nat;
-  };
-
-  public type WeeklyWinner = {
-    principal: Principal;
-    username: Text;
-    score: Nat;
-    weekEndDate: Int; // Timestamp when they won
-  };
-
-  var weeklyWinners : [WeeklyWinner] = [];
+  }; 
 
   var users : Trie.Trie<Principal, User> = Trie.empty();
   var leaderboard : [ScoreEntry] = [];
@@ -115,5 +105,16 @@ persistent actor {
       case (null) { false };
       case (_) { true };
     };
+  };
+
+  public query func usernameExists(username: Text) : async Bool {
+    let usersIter = Trie.iter(users);
+  
+    for ((principal, user) in usersIter) {
+      if (user.username == username) {
+        return true;
+    };
+  };
+    false;
   };
 };

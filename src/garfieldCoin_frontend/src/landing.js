@@ -47,11 +47,16 @@ async function fetchAndDisplayLeaderboard() {
     }
     
     try {
-        const leaderboardData = await actor.getLeaderboard();
-        
+        const [leaderboardData, personalBests] = await Promise.all([
+            actor.getLeaderboard(),
+            actor.getTop20PersonalBests()
+        ]);
+       
         const tableBody = document.querySelector('table tbody');
-        
         tableBody.innerHTML = '';
+
+        const personalBestsTableBody = document.getElementById('#personal-bests-tableBody');
+        personalBestsTableBody.innerHTML = '';
         
         // Populate the table with real data
         leaderboardData.forEach((entry, index) => {
@@ -63,6 +68,16 @@ async function fetchAndDisplayLeaderboard() {
             `;
             tableBody.appendChild(row);
         });
+
+        personalBests.forEach((entry, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${entry.username}</td>
+        <td>${entry.bestScore}</td>
+      `;
+      personalBestsTableBody.appendChild(row);
+    });
         
     } catch (error) {
         console.error('Failed to fetch leaderboard:', error);
