@@ -1,10 +1,19 @@
 import { AuthClient } from "@dfinity/auth-client";
 import { HttpAgent } from "@dfinity/agent";
 import { createActor, canisterId } from "../../declarations/garfieldCoin_backend";
+import lasagne from '../assets/imagesGame/lasagne.png';
+import pizza from '../assets/imagesGame/pizza.png';
+import hotdog from '../assets/imagesGame/hotdog.png';
+import fries from '../assets/imagesGame/fries.png';
+import burger from '../assets/imagesGame/burger.png';
+import cake from '../assets/imagesGame/cake.png';
+import bomb from '../assets/imagesGame/bomb.png';
 
 const principalId = localStorage.getItem("principalId");
 const username = localStorage.getItem("username");
 const wallet = localStorage.getItem("wallet");
+
+let actor;
 
 if (!principalId || !username) {
     alert("You must sign in first!");
@@ -13,7 +22,6 @@ if (!principalId || !username) {
 
 async function initActor() {
     const authClient = await AuthClient.create();
-    await authClient.login({ identityProvider: "none" }); // just to get identity if already logged in
     const identity = await authClient.getIdentity();
 
     const agent = new HttpAgent({ identity });
@@ -97,16 +105,16 @@ document.addEventListener("contextmenu", function (e) {
       garfield.style.left = `${garfieldPosition}px`;
     });
 
-    const foodImages = [
-      'imagesGame/lasagne.png',
-      'imagesGame/pizza.png',
-      'imagesGame/hotdog.png',
-      'imagesGame/fries.png',
-      'imagesGame/burger.png',
-      'imagesGame/cake.png'
-    ];
+ const foodImages = [
+  lasagne,
+  pizza,
+  hotdog,
+  fries,
+  burger,
+  cake
+];
 
-    const bombImage = 'imagesGame/bomb.png';
+    const bombImage = bomb;
 
     function createItem() {
       const item = document.createElement('div');

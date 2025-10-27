@@ -6,8 +6,17 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
 
 export default defineConfig({
+  base: './',
   build: {
     emptyOutDir: true,
+    target: 'esnext',
+    rollupOptions: {  // This should be inside build
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        landing: fileURLToPath(new URL('./landing.html', import.meta.url)),
+        garfieldGame: fileURLToPath(new URL('./garfieldGame.html', import.meta.url)),
+      }
+    }
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -23,12 +32,16 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    host: '127.0.0.1',  // Consider adding this
   },
   publicDir: "assets",
   plugins: [
     environment("all", { prefix: "CANISTER_" }),
     environment("all", { prefix: "DFX_" }),
   ],
+  define: {
+    'process.env': process.env
+  },
   resolve: {
     alias: [
       {

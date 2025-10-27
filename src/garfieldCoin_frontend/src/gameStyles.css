@@ -20,7 +20,7 @@ body {
     width: 120px;
     height: 120px;
     transform: translateX(-50%);
-    background-image: url('imagesGame/garfieldEating.png');
+    background-image: url('../assets/imagesGame/garfieldEating.png');
     background-size: cover;
   }
 
