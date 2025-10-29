@@ -75,8 +75,9 @@ async function fetchAndDisplayLeaderboard() {
         
         weeklyWinners.forEach((user, index) => {
             const row = document.createElement('tr');
+            const displayIndex = weeklyWinners.length - index; // reverse numbering
             row.innerHTML = `
-                <td>${index + 1}</td>
+                <td>${displayIndex}</td>
                 <td>${user.username}</td>
             `;
             tableBodyWeekly.appendChild(row);

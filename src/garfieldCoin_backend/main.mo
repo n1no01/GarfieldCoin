@@ -131,7 +131,13 @@ persistent actor {
   };
 
   public query func getWeeklyWinners() : async [User] {
-    weeklyWinners;
+    Array.reverse(weeklyWinners);
+  };
+
+  public query func getWeeklyWinnersWallets() : async [Text] {
+    Array.map<User, Text>(weeklyWinners, func(user) {
+      user.wallet
+    })
   };
 
   private func emptyLeaderboardAndAddWeeklyWinner() : async () {

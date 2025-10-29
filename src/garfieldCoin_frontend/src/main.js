@@ -33,7 +33,7 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
                 formContainer.innerHTML = `
                   <div id="account-popup" style="display:flex;">
                     <form id="account-form" style="background:#fff;padding:20px;border-radius:12px;">
-                      <h2>Create your account</h2>
+                      <h2>Register to play</h2>
                       <input type="text" id="username" placeholder="Enter your username" required style="display:block;margin:10px 0;padding:8px;width:100%;">
                       <input type="text" id="wallet" placeholder="Enter your $GFC wallet address" required style="display:block;margin:10px 0;padding:8px;width:100%;">
                       <button type="submit">Submit</button>
@@ -50,6 +50,11 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
                     const wallet = document.getElementById("wallet").value.trim();
 
                     const isAvailable = await checkUsername(username);
+
+                    if(username.length < 3 || username.length > 20) {
+                        alert("Username must be between 3 and 20 characters.");
+                        return;
+                    }
 
                      if (!username || !wallet) {
                         alert("Please fill in all fields.");
