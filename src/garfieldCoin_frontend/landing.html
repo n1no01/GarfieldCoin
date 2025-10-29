@@ -35,39 +35,39 @@
 
       <section class="tables">
         <div class="table-card">
-          <h2>🏆 Best Scores</h2>
-          <table>
+          <h2>🏅 Best Weekly Scores</h2>
+          <table id="leaderboard-table">
             <thead>
               <tr>
                 <th>Rank</th>
                 <th>Player</th>
                 <th>Score</th>
+                <th>Date</th>
               </tr>
             </thead>
-            <tbody id="personal-bests-tableBody">
+            <tbody>
               
             </tbody>
           </table>
         </div>
-
-        <div class="table-card">
-          <h2>🏅 Personal Best Scores</h2>
-          <table>
+         <div class="table-card">
+          <h2>🏆 Weekly Winners</h2>
+          <table id="weekly-winners-table">
             <thead>
               <tr>
-                <th>Rank</th>
+                <th>Week</th>
                 <th>Player</th>
-                <th>Score</th>
               </tr>
             </thead>
             <tbody>
-             
+              
             </tbody>
           </table>
         </div>
       </section>
     </main>
   </div>
+  <button id="manual-reset-btn">Manual Weekly Reset (Test)</button>
   <script type="module" src="src/landing.js"></script>
 </body>
 </html>

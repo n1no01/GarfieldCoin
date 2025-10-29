@@ -47,44 +47,61 @@ async function fetchAndDisplayLeaderboard() {
     }
     
     try {
-        const [leaderboardData, personalBests] = await Promise.all([
-            actor.getLeaderboard(),
-            actor.getTop20PersonalBests()
-        ]);
+        const leaderboardData = await actor.getLeaderboard();
        
-        const tableBody = document.querySelector('table tbody');
+        const tableBody = document.querySelector('table#leaderboard-table tbody');
         tableBody.innerHTML = '';
-
-        const personalBestsTableBody = document.getElementById('#personal-bests-tableBody');
-        personalBestsTableBody.innerHTML = '';
         
         // Populate the table with real data
         leaderboardData.forEach((entry, index) => {
             const row = document.createElement('tr');
+            const jsDate = new Date(Number(entry.date) / 1_000_000);
+            const day = String(jsDate.getDate()).padStart(2, '0');
+            const month = String(jsDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = jsDate.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
             row.innerHTML = `
                 <td>${index + 1}</td>
                 <td>${entry.username}</td>
                 <td>${entry.score}</td>
+                <td>${formattedDate}</td>
             `;
             tableBody.appendChild(row);
         });
 
-        personalBests.forEach((entry, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${entry.username}</td>
-        <td>${entry.bestScore}</td>
-      `;
-      personalBestsTableBody.appendChild(row);
-    });
+        const weeklyWinners = await actor.getWeeklyWinners();
+        const tableBodyWeekly = document.querySelector('table#weekly-winners-table tbody');
+        tableBodyWeekly.innerHTML = '';
         
+        weeklyWinners.forEach((user, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${user.username}</td>
+            `;
+            tableBodyWeekly.appendChild(row);
+        });
+
     } catch (error) {
         console.error('Failed to fetch leaderboard:', error);
     }
 }
 
 // Call when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    fetchAndDisplayLeaderboard();
+document.addEventListener('DOMContentLoaded', async () => {
+    await fetchAndDisplayLeaderboard();
+});
+
+document.getElementById("manual-reset-btn").addEventListener("click", async () => {
+    try {
+        const result = await actor.manualWeeklyReset();
+        console.log(result); // "Weekly reset completed"
+        alert(result);
+        
+        // Refresh the leaderboard display after reset
+        await fetchAndDisplayLeaderboard();
+    } catch (error) {
+        console.error('Failed to reset leaderboard:', error);
+        alert('Error resetting leaderboard: ' + error.message);
+    }
 });

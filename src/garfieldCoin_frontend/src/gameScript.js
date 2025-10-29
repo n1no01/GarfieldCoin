@@ -61,9 +61,9 @@ let gameActive = true;
 const isMobile = window.innerWidth <= 600;
 
 // Adjust game difficulty dynamically
-const foodFallSpeed = isMobile ? 15 : 12;
-const foodSpawnInterval = isMobile ? 500 : 700;
-const foodMoveInterval = isMobile ? 30 : 50;
+const foodFallSpeed = isMobile ? 15 : 20;
+const foodSpawnInterval = isMobile ? 500 : 600;
+const foodMoveInterval = isMobile ? 30 : 40;
 
 // === Desktop Controls ===
 document.addEventListener('keydown', (e) => {

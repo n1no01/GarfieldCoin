@@ -1,8 +1,10 @@
 import Principal "mo:base/Principal";
 import Trie "mo:base/Trie";
 import Array "mo:base/Array";
+import Buffer "mo:base/Buffer";
 import Int "mo:base/Int";
-import Iter "mo:base/Iter";
+import Time "mo:base/Time";
+import Timer "mo:core/Timer";
 
 persistent actor {
 
@@ -16,15 +18,18 @@ persistent actor {
     principal: Principal;
     username: Text;
     score: Nat;
+    date: Time.Time;
   }; 
 
+  // Use arrays for stable storage (persistent actor requirement)
   var users : Trie.Trie<Principal, User> = Trie.empty();
   var leaderboard : [ScoreEntry] = [];
+  var weeklyWinners : [User] = [];
 
   public shared(msg) func submitScore(score: Nat) : async Text {
     let caller = msg.caller;
     let userKey = { hash = Principal.hash(caller); key = caller };
-    
+
     switch (Trie.find(users, userKey, Principal.equal)) {
       case (null) {
         return "User not registered.";
@@ -34,19 +39,27 @@ persistent actor {
           principal = caller;
           username = user.username;
           score = score;
+          date = Time.now();
         };
 
-        leaderboard := Array.sort<ScoreEntry>(
-          Array.append<ScoreEntry>(leaderboard, [newEntry]),
+        // Convert to Buffer for efficient operations
+        let leaderboardBuffer = Buffer.fromArray<ScoreEntry>(leaderboard);
+        leaderboardBuffer.add(newEntry);
+        
+        // Convert to array, sort, and keep top 20
+        let sortedArray = Array.sort<ScoreEntry>(
+          Buffer.toArray(leaderboardBuffer),
           func(a: ScoreEntry, b: ScoreEntry) {
-            Int.compare(b.score, a.score);
+            Int.compare(b.score, a.score)
           }
         );
-
-        if (leaderboard.size() > 20) {
-          leaderboard := Array.subArray(leaderboard, 0, 20);
+        
+        if (sortedArray.size() > 20) {
+          leaderboard := Array.subArray(sortedArray, 0, 20);
+        } else {
+          leaderboard := sortedArray;
         };
-
+        
         return "Score submitted!";
       };
     };
@@ -80,7 +93,7 @@ persistent actor {
         let newUser: User = {
           principal = caller;
           username = userName;
-          wallet = walletAdress;
+          wallet = walletAdress
         };
         let (newUsers, _) = Trie.put(users, userKey, Principal.equal, newUser);
         users := newUsers;
@@ -109,12 +122,43 @@ persistent actor {
 
   public query func usernameExists(username: Text) : async Bool {
     let usersIter = Trie.iter(users);
-  
-    for ((principal, user) in usersIter) {
+    for ((_, user) in usersIter) {
       if (user.username == username) {
         return true;
+      };
     };
-  };
     false;
+  };
+
+  public query func getWeeklyWinners() : async [User] {
+    weeklyWinners;
+  };
+
+  private func emptyLeaderboardAndAddWeeklyWinner() : async () {
+    if (leaderboard.size() > 0) {
+      let winner = leaderboard[0];
+      
+      let winnerKey = { hash = Principal.hash(winner.principal); key = winner.principal };
+      switch (Trie.find(users, winnerKey, Principal.equal)) {
+        case (?user) {
+          // Use Buffer for efficient append
+          let winnersBuffer = Buffer.fromArray<User>(weeklyWinners);
+          winnersBuffer.add(user);
+          weeklyWinners := Buffer.toArray(winnersBuffer);
+        };
+        case (null) {
+          // Winner not found in users
+        };
+      };
+    };
+    leaderboard := [];
+  };
+
+  let sevenDays = 7 * 24 * 60 * 60;
+  ignore Timer.recurringTimer<system>(#seconds sevenDays, emptyLeaderboardAndAddWeeklyWinner);
+
+  public shared(msg) func manualWeeklyReset() : async Text {
+    await emptyLeaderboardAndAddWeeklyWinner();
+    return "Weekly reset completed";
   };
 };
