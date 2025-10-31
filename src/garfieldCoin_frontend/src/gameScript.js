@@ -187,7 +187,7 @@ const timerInterval = setInterval(() => {
 
     // Submit score and then start redirect countdown
     submitScore(score).then(() => {
-      let redirectCountdown = 5;
+      let redirectCountdown = 3;
       gameOverElement.innerHTML = `
         Game Over! Final Score: ${score}<br>
         Redirecting to landing page in <span id="redirect-timer">${redirectCountdown}</span> seconds...

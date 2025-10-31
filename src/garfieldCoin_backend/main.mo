@@ -147,7 +147,6 @@ persistent actor {
       let winnerKey = { hash = Principal.hash(winner.principal); key = winner.principal };
       switch (Trie.find(users, winnerKey, Principal.equal)) {
         case (?user) {
-          // Use Buffer for efficient append
           let winnersBuffer = Buffer.fromArray<User>(weeklyWinners);
           winnersBuffer.add(user);
           weeklyWinners := Buffer.toArray(winnersBuffer);

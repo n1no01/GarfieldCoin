@@ -9,21 +9,13 @@ body{
     color:black;
 }
 #vh100{
-    height: 100vh;
+    height: 70vh;
 }
 
 h1{
     font-size: 3rem;
     margin-top: 30px;
     margin-bottom: 30px;
-}
-
-#garfield-img{
-    width: 10%;
-    border-radius: 500px;
-    display: block;
-    margin: 30px auto;
-    outline: 5px solid black;
 }
 
 #slogan{
@@ -76,6 +68,7 @@ canvas{
     display: block;
     margin: 0 auto;
     width: 300px;
+    cursor: pointer;
 }
 
 button {
@@ -189,12 +182,6 @@ a{
         padding-bottom: 40px;
     }
 
-    #garfield-img{
-        width: 30%;
-        display: block;
-        margin: 30px auto;
-        outline: 3px solid black;
-    }
     #slogan{
         font-size: 1.4rem;
     }

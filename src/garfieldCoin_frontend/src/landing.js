@@ -19,9 +19,8 @@ async function initActor() {
 
     const agent = new HttpAgent({ 
         identity,
-        host: process.env.DFX_NETWORK === "ic" 
-            ? "https://ic0.app" 
-            : "http://127.0.0.1:4943"
+        host: "https://ic0.app", 
+            //: "http://127.0.0.1:4943"
     });
     
     if (process.env.DFX_NETWORK !== "ic") {
@@ -93,16 +92,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchAndDisplayLeaderboard();
 });
 
-document.getElementById("manual-reset-btn").addEventListener("click", async () => {
-    try {
-        const result = await actor.manualWeeklyReset();
-        console.log(result); // "Weekly reset completed"
-        alert(result);
-        
-        // Refresh the leaderboard display after reset
-        await fetchAndDisplayLeaderboard();
-    } catch (error) {
-        console.error('Failed to reset leaderboard:', error);
-        alert('Error resetting leaderboard: ' + error.message);
-    }
-});
+// document.getElementById("manual-reset-btn").addEventListener("click", async () => {
+//     try {
+//         const result = await actor.manualWeeklyReset();
+//         console.log(result); // "Weekly reset completed"        
+//         // Refresh the leaderboard display after reset
+//         await fetchAndDisplayLeaderboard();
+//     } catch (error) {
+//         console.error('Failed to reset leaderboard:', error);
+//         alert('Error resetting leaderboard: ' + error.message);
+//     }
+// });

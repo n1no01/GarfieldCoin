@@ -14,5 +14,8 @@
   "type": "module",
   "workspaces": [
     "src/garfieldCoin_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@junobuild/config": "^2.5.0"
+  }
 }

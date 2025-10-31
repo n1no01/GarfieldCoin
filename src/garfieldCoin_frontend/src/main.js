@@ -7,9 +7,8 @@ let authClient, actor, principalText;
 document.getElementById("garfield-laying").addEventListener("click", async () => {
     authClient = await AuthClient.create();
     authClient.login({
-        identityProvider: process.env.DFX_NETWORK === "ic" 
-            ? "https://id.ai/" 
-            : `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`,
+        identityProvider: "https://id.ai/", 
+            //: `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`,
 
         // identityProvider: `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`, //"https://id.ai/",
         onSuccess: async () => {
@@ -22,7 +21,7 @@ document.getElementById("garfield-laying").addEventListener("click", async () =>
               await agent.fetchRootKey();
             }
             actor = createActor(canisterId, { agent });
-            alert(principalText);
+            // alert(principalText);
 
             // ✅ Check if user is already registered
             const existingUser = await actor.userExists(principalText);

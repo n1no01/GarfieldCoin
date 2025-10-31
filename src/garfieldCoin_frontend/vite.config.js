@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     target: 'esnext',
-    rollupOptions: {  // This should be inside build
+    rollupOptions: { 
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         landing: fileURLToPath(new URL('./landing.html', import.meta.url)),
