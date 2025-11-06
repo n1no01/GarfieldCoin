@@ -91,15 +91,3 @@ async function fetchAndDisplayLeaderboard() {
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchAndDisplayLeaderboard();
 });
-
-// document.getElementById("manual-reset-btn").addEventListener("click", async () => {
-//     try {
-//         const result = await actor.manualWeeklyReset();
-//         console.log(result); // "Weekly reset completed"        
-//         // Refresh the leaderboard display after reset
-//         await fetchAndDisplayLeaderboard();
-//     } catch (error) {
-//         console.error('Failed to reset leaderboard:', error);
-//         alert('Error resetting leaderboard: ' + error.message);
-//     }
-// });

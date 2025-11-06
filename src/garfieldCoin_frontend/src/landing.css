@@ -170,3 +170,37 @@ tbody tr:nth-child(odd) {
 tbody tr:hover {
   background-color: rgb(254, 186, 60);
 }
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+  header p {
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+  
+  #play-btn {
+    padding: 8px 25px;
+    font-size: 0.95rem;
+  }
+  
+  .logout {
+    padding: 5px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .popup-content {
+    padding: 15px;
+    max-width: 300px;
+  }
+  
+  .table-card {
+    max-width: 100%;
+  }
+  
+  th, td {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+}

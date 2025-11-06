@@ -166,4 +166,15 @@ persistent actor {
     await emptyLeaderboardAndAddWeeklyWinner();
     return "Weekly reset completed";
   };
+
+  public shared(msg) func manualLeaderboardReset() : async Text {
+    leaderboard := [];
+    return "Leaderboard reset completed";
+  };
+
+  public shared(msg) func manualWeeklyWinnerTableReset() : async Text {
+    weeklyWinners := [];
+    return "Weekly winner table reset completed";
+  };
+
 };

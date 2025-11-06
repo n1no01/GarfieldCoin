@@ -3,11 +3,13 @@ import { HttpAgent } from "@dfinity/agent";
 import { createActor, canisterId } from "../../declarations/garfieldCoin_backend";
 
 let authClient, actor, principalText;
+const canonicalOrigin = "https://jnyc6-7yaaa-aaaak-qunkq-cai.icp0.io";
 
 document.getElementById("garfield-laying").addEventListener("click", async () => {
     authClient = await AuthClient.create();
     authClient.login({
         identityProvider: "https://id.ai/", 
+        derivationOrigin: canonicalOrigin,
             //: `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`,
 
         // identityProvider: `http://${process.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`, //"https://id.ai/",
