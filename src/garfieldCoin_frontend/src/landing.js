@@ -89,5 +89,5 @@ async function fetchAndDisplayLeaderboard() {
 
 // Call when page loads
 document.addEventListener('DOMContentLoaded', async () => {
-    await fetchAndDisplayLeaderboard();
+    fetchAndDisplayLeaderboard();
 });

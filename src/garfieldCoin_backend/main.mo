@@ -130,6 +130,16 @@ persistent actor {
     false;
   };
 
+  public query func getWalletByUsername(username: Text) : async ?Text {
+  let usersIter = Trie.iter(users);
+  for ((_, user) in usersIter) {
+    if (user.username == username) {
+      return ?user.wallet;
+    };
+  };
+  return null;
+};
+
   public query func getWeeklyWinners() : async [User] {
     Array.reverse(weeklyWinners);
   };

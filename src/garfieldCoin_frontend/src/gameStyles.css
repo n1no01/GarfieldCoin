@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
     margin: 0;
     overflow: hidden;
@@ -9,6 +14,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     background: linear-gradient(#f8d9a0, #ffb74d);
     overflow: hidden;
   }
