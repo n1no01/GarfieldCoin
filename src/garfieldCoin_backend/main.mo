@@ -187,4 +187,14 @@ persistent actor {
     return "Weekly winner table reset completed";
   };
 
+  public shared query(msg) func getMyUsername() : async ?Text {
+  let caller = msg.caller;
+  let userKey = { hash = Principal.hash(caller); key = caller };
+  
+  switch (Trie.find(users, userKey, Principal.equal)) {
+    case (null) { null };
+    case (?user) { ?user.username };
+  };
+};
+
 };

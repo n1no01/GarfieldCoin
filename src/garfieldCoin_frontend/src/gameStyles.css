@@ -8,7 +8,6 @@ html, body {
 }
 
 body {
-    overflow: hidden;
     font-family: Arial, sans-serif;
     background-color: #fceabb;
   }
@@ -29,7 +28,7 @@ body {
     left: 50%;
     width: 120px;
     height: 120px;
-    transform: translateX(-50%);
+    left: calc(50% - 60px);
     background-image: url('../assets/imagesGame/garfieldEating.png');
     background-size: cover;
   }
@@ -41,7 +40,6 @@ body {
     background-color: transparent; /* Remove the background color */
     background-size: cover; /* Ensures the image covers the entire div */
     background-position: center; /* Centers the image */
-    will-change: transform, top;
   }
 
   #score {
@@ -74,6 +72,7 @@ body {
     #garfield {
       width: 90px;
       height: 90px;
+      left: calc(50% - 45px);
     }
 
     .food {

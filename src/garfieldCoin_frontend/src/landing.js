@@ -30,6 +30,26 @@ async function initActor() {
     actor = createActor(canisterId, { agent });
 }
 
+async function greetUser() {
+    if (!actor) {
+        await initActor();
+    }
+    
+    try {
+        const username = await actor.getMyUsername();
+        const greetingElement = document.getElementById("greeting");
+        
+        if (username && username.length > 0) {
+            greetingElement.textContent = `Welcome back, ${username[0]}!`;
+        } else {
+            greetingElement.textContent = "Welcome, Guest!";
+        }
+    } catch (error) {
+        console.error("Failed to get username:", error);
+        document.getElementById("greeting").textContent = "Welcome!";
+    }
+}
+
 document.getElementById("play-btn").addEventListener("click", () => {
     window.location.href = "garfieldGame.html";
 });
@@ -88,6 +108,8 @@ async function fetchAndDisplayLeaderboard() {
 }
 
 // Call when page loads
-document.addEventListener('DOMContentLoaded', async () => {
-    fetchAndDisplayLeaderboard();
+document.addEventListener('DOMContentLoaded', () => {
+  // Run both async functions in parallel
+  Promise.all([greetUser(), fetchAndDisplayLeaderboard()])
+    .catch(err => console.error("Error during initialization:", err));
 });
