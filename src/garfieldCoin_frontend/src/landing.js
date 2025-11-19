@@ -42,7 +42,8 @@ async function greetUser() {
         if (username && username.length > 0) {
             greetingElement.textContent = `Welcome back, ${username[0]}!`;
         } else {
-            greetingElement.textContent = "Welcome, Guest!";
+            alert("You must sign in if you want to compete on the leaderboard!");
+            window.location.href = "index.html";
         }
     } catch (error) {
         console.error("Failed to get username:", error);
