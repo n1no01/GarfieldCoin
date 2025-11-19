@@ -1,6 +1,7 @@
 GarfieldCoin — Official Website & Weekly Game Leaderboard (ICP)
 
 https://garfieldcoin.xyz/
+
 https://jnyc6-7yaaa-aaaak-qunkq-cai.icp0.io/
 
 GarfieldCoin is a memetoken built on the Internet Computer (ICP), featuring an interactive official website and a full-stack competitive arcade game. Every week, players battle for the highest score, and the top performer is recorded permanently as the Weekly Winner.
