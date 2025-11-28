@@ -9,12 +9,17 @@ import burger from '../assets/imagesGame/burger.png';
 import cake from '../assets/imagesGame/cake.png';
 import bomb from '../assets/imagesGame/bomb.png';
 
-// === Preload Images ===
+// === Preload Images and Sound Effects ===
 const allImages = [lasagne, pizza, hotdog, fries, burger, cake, bomb];
 allImages.forEach(src => {
   const img = new Image();
   img.src = src;
 });
+
+const explosion = new Audio('../soundsGame/explosion.mp3');
+const collect = new Audio('../soundsGame/collect.mp3');
+explosion.volume = 0.1;
+collect.volume = 0.1;
 
 // === Auth ===
 const principalId = localStorage.getItem("principalId");
@@ -84,7 +89,7 @@ const isMobile = window.innerWidth <= 600;
 // === Balance Adjustments ===
 const TARGET_BOMB_RATIO = isMobile ? 0.2 : 0.15;
 const bombPenalty = isMobile ? 5 : 3;
-const foodSpawnInterval = isMobile ? 400 : 300;
+const foodSpawnInterval = isMobile ? 150 : 100; // instead of 400/300
 const foodMoveInterval = isMobile ? 30 : 40;
 const garfieldSpeed = isMobile ? 50 : 70;
 const foodFallSpeed = isMobile ? 24 : 18;
@@ -188,8 +193,15 @@ function moveItem(item) {
       itemRect.right > garfieldRect.left) {
     if (item.dataset.type === "bomb") {
       score -= bombPenalty;
+      explosion.currentTime = 0;
+      explosion.play();
       if (score < 0) score = 0;
-    } else score++;
+    } 
+    else {
+      score++;
+      collect.currentTime = 0;
+      collect.play();
+    }
     scoreElement.textContent = `Score: ${score}`;
     item.remove();
     return false;

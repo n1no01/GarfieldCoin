@@ -9,6 +9,7 @@
 
 body {
   background-color: orange;
+  background-image: url('../assets/images/snow.gif');
   color: black;
   text-align: center;
   min-height: 100vh;

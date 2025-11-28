@@ -5,9 +5,11 @@
 }
 body{
     background-color: orange;
+    background-image: url('assets/images/snow.gif');
     text-align: center;
     color:black;
 }
+
 #vh100{
     height: 70vh;
 }
@@ -76,7 +78,7 @@ button {
     margin-bottom: 30px;
     width: 12%;
     padding: 10px 10px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: bolder;
     display: inline;
     border-radius: 12px;
@@ -192,7 +194,7 @@ a{
     button{
         display: block;
         margin: 0 auto;
-        width: 30%;
+        width: 40%;
     }
     h2{
         font-size: 1.5rem;
